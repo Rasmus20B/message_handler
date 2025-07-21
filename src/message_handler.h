@@ -8,6 +8,7 @@
 #include <memory>
 #include <mutex>
 #include <print>
+#include <ratio>
 #include <span>
 #include <thread>
 #include <tuple>
@@ -30,7 +31,7 @@ struct MessageLine {
 
   void append(MessageType m) {
     if (this->head >= FrameSize) {
-  		std::println("tried to push into full buffer.");
+  		std::println("tried to push into full buffer ({} / {}).", head, FrameSize);
       return;
     }
 
@@ -40,7 +41,7 @@ struct MessageLine {
 
   void emplace(MessageType&& m) {
   	if(this->head >= FrameSize) {
-  		std::println("tried to emplace into full buffer.");
+  		std::println("tried to emplace into full buffer ({} / {}).", head, FrameSize);
   		return;
   	}
 
@@ -54,20 +55,25 @@ struct MessageLine {
 
 template <typename MessageType> struct Processor;
 
-
 template <> struct Processor<OrderBookMessage> {
   static void process(std::span<OrderBookMessage> messages) {
-    std::println("messages in o buffer: {}", messages.size());
+  	for(auto m: messages) {
+  		counter++;
+  	}
+    // std::println("messages in o buffer: {}", messages.size());
   }
 };
 
 template <> struct Processor<BasicDataMessage> {
   static void process(std::span<BasicDataMessage> messages) {
-    std::println("messages in bdm buffer: {}", messages.size());
+  	for(auto m: messages) {
+  		counter++;
+  	}
+    // std::println("messages in bdm buffer: {}", messages.size());
   }
 };
 
-template <uint64_t FrameSize = 32768, typename... MessageTypes>
+template <uint64_t FrameSize, typename CTX, typename... MessageTypes>
   requires(std::has_single_bit(FrameSize))
 struct MessageHandler {
 	using MessageFrame = std::tuple<MessageLine<MessageTypes, FrameSize>...>;
@@ -88,7 +94,7 @@ public:
 	  	auto& line = std::get<MessageLine<MessageType, FrameSize>>(message_frames[pending]);
 	  	line.emplace(std::move(message));
 
-	  	writer_counts[pending].fetch_sub(1, std::memory_order_relaxed);
+	  	writer_counts[pending].fetch_sub(1, std::memory_order_acq_rel);
 	  	return true;
   	}
   }
@@ -97,9 +103,12 @@ public:
 		auto new_active = !active_frame_handle.load(std::memory_order_relaxed);
 		active_frame_handle.store(new_active, std::memory_order_release);
 
+		// if there are any threads still writing to the old pending frame
+		// then we wait.
 		while (writer_counts[new_active].load(std::memory_order_seq_cst) != 0) {
 			std::this_thread::yield();
 		}
+
 	  std::apply([&]<typename... MessageLines>(MessageLines&... lines) {
 	    (Processor<typename MessageLines::value_type>::process(std::span(lines.buffer.data(), lines.head)), ...);
 	    ((lines.head = 0),...);
@@ -111,8 +120,7 @@ public:
 		process_thread = std::thread(
 			[&]() {
 				while(!shutdown.load(std::memory_order_relaxed)) {
-						try_flush();
-						std::this_thread::yield();
+					try_flush();
 				}
 				// Flush the final buffer
 				try_flush();
@@ -132,22 +140,13 @@ public:
 	}
 
 private:
-	MessageFrame& active_frame() {
-		return this->message_frames[active_frame_handle.load(std::memory_order_acquire)];
-	}
-
-	MessageFrame& pending_frame() {
-		return this->message_frames[!active_frame_handle.load(std::memory_order_acquire)];
-	}
-
-
-private:
   std::array<MessageFrame, 2>
       message_frames;
   std::atomic<uint8_t> active_frame_handle{0};
   std::array<std::atomic<uint32_t>, 2> writer_counts{0, 0};
   std::thread process_thread;
   std::atomic<bool> shutdown;
+  std::shared_ptr<CTX> context;
 };
 
 } // namespace message_handler

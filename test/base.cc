@@ -9,13 +9,13 @@ using namespace message_handler;
 
 TEST(add, basic) {
 
-	MessageHandler<32768,
+	MessageHandler<4096, void,
 	 		OrderBookMessage,
 	 		BasicDataMessage> message_handler;
 
 	message_handler.start();
 
-	for(int i = 0; i < 300000000; i++) {
+	for(uint64_t i = 0; i < 50000000; i++) {
 		message_handler.emplace (
 		  OrderBookMessage {
 				.timestamp = 1238947389,
