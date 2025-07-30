@@ -1,4 +1,5 @@
-#include "../src/message_handler.h"
+#include "../src/double_buffer/double_buffer.h"
+#include "../src/single_buffer/single_buffer.h"
 #include <chrono>
 #include <gtest/gtest.h>
 
@@ -15,7 +16,7 @@ TEST(add, basic) {
 
 	message_handler.start();
 
-	for(uint64_t i = 0; i < 50000000; i++) {
+	for(uint64_t i = 0; i < 500000; i++) {
 		message_handler.emplace (
 		  OrderBookMessage {
 				.timestamp = 1238947389,
@@ -32,4 +33,8 @@ TEST(add, basic) {
 	message_handler.stop();
 
 	std::println("{}", counter.load());
+}
+
+TEST(single_arena, basic) {
+	
 }

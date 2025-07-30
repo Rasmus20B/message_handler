@@ -1,7 +1,14 @@
-set(SOURCE_FILES
-	${CMAKE_SOURCE_DIR}/src/message_handler.cc
-	${CMAKE_SOURCE_DIR}/src/message_handler.h
-)
-include_directories(${CMAKE_SOURCE_DIR}/src)
-add_library(${PROJECT_NAME} ${SOURCE_FILES})
+
+add_library(${PROJECT_NAME} STATIC)
+
 target_link_libraries(${PROJECT_NAME})
+
+target_sources(${PROJECT_NAME}
+	PUBLIC
+		./message_handler.cc
+		./messages.h
+		./double_buffer/double_buffer.h
+		./single_buffer/single_buffer.h
+		./output_buffer/output_buffer.h
+)
+
