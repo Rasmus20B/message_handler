@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-subbuild/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

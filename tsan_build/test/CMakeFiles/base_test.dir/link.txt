@@ -1,1 +1,0 @@
-/opt/homebrew/opt/llvm/bin/clang++ -fsanitize=thread -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names -L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++ CMakeFiles/base_test.dir/base.cc.o CMakeFiles/base_test.dir/__/src/message_handler.cc.o -o base_test  ../lib/libgtest_main.a ../src/libmessage_handler.a ../lib/libgtest.a
