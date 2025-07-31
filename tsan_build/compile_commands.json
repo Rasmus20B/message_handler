@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/Users/merimak/prog/message_handler/tsan_build/src",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -fsanitize=thread -g -std=gnu++23 -arch arm64 -Wall -pedantic -O2 -o CMakeFiles/message_handler.dir/message_handler.cc.o -c /Users/merimak/prog/message_handler/src/message_handler.cc",
+  "file": "/Users/merimak/prog/message_handler/src/message_handler.cc",
+  "output": "src/CMakeFiles/message_handler.dir/message_handler.cc.o"
+},
+{
+  "directory": "/Users/merimak/prog/message_handler/tsan_build/test",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++  -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/include -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest -fsanitize=thread -g -std=gnu++23 -arch arm64 -Wall -pedantic -O2 -o CMakeFiles/base_test.dir/base.cc.o -c /Users/merimak/prog/message_handler/test/base.cc",
+  "file": "/Users/merimak/prog/message_handler/test/base.cc",
+  "output": "test/CMakeFiles/base_test.dir/base.cc.o"
+},
+{
+  "directory": "/Users/merimak/prog/message_handler/tsan_build/test",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++  -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/include -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest -fsanitize=thread -g -std=gnu++23 -arch arm64 -Wall -pedantic -O2 -o CMakeFiles/base_test.dir/__/src/message_handler.cc.o -c /Users/merimak/prog/message_handler/src/message_handler.cc",
+  "file": "/Users/merimak/prog/message_handler/src/message_handler.cc",
+  "output": "test/CMakeFiles/base_test.dir/__/src/message_handler.cc.o"
+},
+{
+  "directory": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-build/googlemock",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++  -I/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock/include -I/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/include -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest -fsanitize=thread -g -std=c++23 -arch arm64 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -Wall -pedantic -O2 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "file": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "output": "_deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o"
+},
+{
+  "directory": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-build/googlemock",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++  -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock/include -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/include -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest -fsanitize=thread -g -std=c++23 -arch arm64 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -Wall -pedantic -O2 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "file": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "output": "_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
+},
+{
+  "directory": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-build/googletest",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++  -I/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/include -I/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest -fsanitize=thread -g -std=c++23 -arch arm64 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -Wall -pedantic -O2 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "file": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "output": "_deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o"
+},
+{
+  "directory": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-build/googletest",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++  -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/include -isystem /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest -fsanitize=thread -g -std=c++23 -arch arm64 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -Wall -pedantic -O2 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "file": "/Users/merimak/prog/message_handler/tsan_build/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "output": "_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o"
+}
+]

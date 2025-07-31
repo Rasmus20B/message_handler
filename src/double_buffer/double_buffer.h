@@ -53,10 +53,10 @@ struct MessageLine {
   uint64_t head{0};
 };
 
-template <typename MessageType> struct Processor;
+template <typename MessageType, typename CTX> struct Processor;
 
-template <> struct Processor<OrderBookMessage> {
-  static void process(std::span<OrderBookMessage> messages) {
+template <typename CTX> struct Processor<OrderBookMessage, CTX> {
+  static void process(std::span<OrderBookMessage> messages, std::shared_ptr<CTX>& context) {
   	for(auto m: messages) {
   		counter++;
   	}
@@ -64,8 +64,8 @@ template <> struct Processor<OrderBookMessage> {
   }
 };
 
-template <> struct Processor<BasicDataMessage> {
-  static void process(std::span<BasicDataMessage> messages) {
+template <typename CTX> struct Processor<BasicDataMessage, CTX> {
+  static void process(std::span<BasicDataMessage> messages, std::shared_ptr<CTX>& context) {
   	for(auto m: messages) {
   		counter++;
   	}
@@ -110,7 +110,7 @@ public:
 		}
 
 	  std::apply([&]<typename... MessageLines>(MessageLines&... lines) {
-	    (Processor<typename MessageLines::value_type>::process(std::span(lines.buffer.data(), lines.head)), ...);
+	    (Processor<typename MessageLines::value_type, CTX>::process(std::span(lines.buffer.data(), lines.head), this->context), ...);
 	    ((lines.head = 0),...);
 	  }, message_frames[new_active]);
 	}

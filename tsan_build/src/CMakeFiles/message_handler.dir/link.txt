@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmessage_handler.a CMakeFiles/message_handler.dir/message_handler.cc.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libmessage_handler.a
